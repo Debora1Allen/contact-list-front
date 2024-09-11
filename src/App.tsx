@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import PersonList from './components/PersonList';
+import PersonForm from './components/PersonForm';
+import './styles/main.scss';
 
-function App() {
+export interface IContact {
+  type: string;
+  value: string;
+}
+
+export interface IPerson {
+  _id: string;
+  name: string;
+  contacts: IContact[];
+}
+
+const App: React.FC = () => {
+  const [persons, setPersons] = useState<IPerson[]>([]);
+
+  const fetchPersons = async () => {
+    const response = await fetch('http://localhost:3000/api/persons');
+    const data = await response.json();
+    setPersons(data);
+  };
+
+  useEffect(() => {
+    fetchPersons();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PersonForm fetchPersons={fetchPersons} />
+      <PersonList persons={persons} fetchPersons={fetchPersons} />
     </div>
   );
-}
+};
 
 export default App;
