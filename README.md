@@ -45,3 +45,17 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 # contact-list-front
+
+```
+/contact-list-front
+|-- /src
+|   |-- /components
+|       |-- PersonList.tsx
+|       |-- PersonForm.tsx
+|   |-- /styles
+|       |-- main.scss
+|   |-- App.tsx
+|-- tsconfig.json
+|-- package.json
+
+```
